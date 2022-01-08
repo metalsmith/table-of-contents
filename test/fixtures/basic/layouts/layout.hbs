@@ -1,0 +1,14 @@
+{{~#*inline "renderToc" ~}}
+<ol class="toc">
+  {{#each .}}
+  <li>
+    <a href="#{{{ anchor }}}">{{ text }}</a>
+    {{#if items.length }}
+    {{> renderToc items }}
+    {{/if}}
+  </li>
+  {{/each}}
+</ol>
+{{/inline~}}
+{{#if toc}}{{> renderToc toc.items }}{{/if}}
+{{{ contents }}}
