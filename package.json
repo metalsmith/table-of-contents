@@ -1,6 +1,6 @@
 {
   "name": "@metalsmith/table-of-contents",
-  "version": "0.1.5",
+  "version": "1.0.0",
   "description": "A metalsmith plugin to generate table of contents.",
   "keywords": [
     "table-of-contents",
