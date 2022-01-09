@@ -29,11 +29,11 @@ yarn add @metalsmith/table-of-contents
 Add `@metalsmith/table-of-contents` to your metalsmith build:
 
 ```javascript
-const metalsmith = require('metalsmith');
-const toc = require('@metalsmith/table-of-contents');
-const layouts = require('@metalsmith/layouts');
+const metalsmith = require('metalsmith')
+const toc = require('@metalsmith/table-of-contents')
+const layouts = require('@metalsmith/layouts')
 
-metalsmith(__dirname).use(toc()); // defaults
+metalsmith(__dirname).use(toc()) // defaults
 metalsmith(__dirname)
   .use(
     toc({
@@ -44,7 +44,7 @@ metalsmith(__dirname)
     })
   )
   .use(layouts()) // use layouts/in-place for custom HTML rendering
-  .build();
+  .build()
 ```
 
 Specify `toc: true` in the file's frontmatter:
@@ -115,7 +115,7 @@ If you need to customize the rendered HTML, you can always use [`@metalsmith/lay
 {{#*inline "renderToc" }}
 <ol class="toc">
   {{#each .}}
-  <li data-level="{{ ">
+  <li data-level="{{ level }}">
     <a href="#{{{ anchor }}}">{{ text }}</a>
     {{#if items.length }} {{> renderToc items }} {{/if}}
   </li>
@@ -134,11 +134,11 @@ Sometimes you need to re-use existing `<a name="">` tags as anchors instead of t
 metalsmith.use(
   tableOfContents({
     anchor($el) {
-      const $anchor = $el.prev();
-      return $anchor.length ? $anchor.attr('name') : null;
+      const $anchor = $el.prev()
+      return $anchor.length ? $anchor.attr('name') : null
     }
   })
-);
+)
 ```
 
 ### Debug
@@ -168,7 +168,7 @@ To use this plugin with the Metalsmith CLI, add `@metalsmith/table-of-contents` 
   "plugins": [
     {
       "@metalsmith/table-of-contents": {
-        "levels": [1, 2, 3, 4, 5, 6],
+        "levels": [2, 3, 4, 5, 6],
         "anchor": "add",
         "root": null
       }
@@ -176,6 +176,10 @@ To use this plugin with the Metalsmith CLI, add `@metalsmith/table-of-contents` 
   ]
 }
 ```
+
+### Caveat
+
+According to the HTML specification a `<section><h1>Title</h1></section>` will be recognized as a `<h2>`. This plugin does not take section roots into account, so you should explicitly use `h1-h6` tags.
 
 ## Credits
 
